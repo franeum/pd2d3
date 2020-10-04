@@ -14,13 +14,13 @@ class PdLexer(Lexer):
 
     # Regular expression rules for tokens
     
-    CANVAS = r'canvas'
-    OBJ = r'obj'
-    TEXT = r'text'
-    CONNECT = r'connect'
-    DECLARE = r'declare'
-    FLOATATOM = r'floatatom'
-    MSG = r'msg'
+    CANVAS = r'#N canvas'
+    OBJ = r'#X obj'
+    TEXT = r'#X text'
+    CONNECT = r'#X connect'
+    DECLARE = r'#X declare'
+    FLOATATOM = r'#X floatatom'
+    MSG = r'#X msg'
     FLOAT = r'\d+\.*\d*'
     LITERAL = r'[ a-zA-Z_*~\(\)\.\-\+0-9\nèùàéò%\\\$=,]+'
     
