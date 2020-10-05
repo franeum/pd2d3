@@ -1,0 +1,125 @@
+extends layout
+
+block content
+  script.
+    $(document).ready(function() {
+      console.log("ciao!")
+      
+      const graph = !{ JSON.stringify(graph) }
+      let newGraph = []
+      
+      let width = undefined 
+      let height = undefined 
+
+      for (let i = 0; i < graph.length; ++i){
+        if (graph[i].type == 'canvas') {
+          width = graph[i].x 
+          height = graph[i].y 
+          break 
+        }
+      }
+
+      /*const svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("id", "maingraph")*/
+
+      const svg = d3.select("body")
+        .append("svg")
+        .attr("viewBox",`0 0 ${width} ${height}`)
+        .attr("id", "maingraph")
+
+      let minX = 10000
+      let minY = 10000
+      let offsetX = 10
+      let offsetY = 10
+
+      graph.forEach(e => {
+        if (e.x < minX) minX = e.x 
+        if (e.y < minY) minY = e.y
+      })
+
+      //console.log(minX, minY)
+
+      // draw object boxes
+      graph.forEach(e => {
+        if (e.type == 'obj') {
+          
+          const len = (x) => {
+            let lunghezza = 60
+            if ((x.length * 10) > lunghezza)
+              lunghezza = x.length * 10
+            return lunghezza
+          }
+
+          svg.append("rect") 
+            .attr("x", e.x - minX + offsetX)
+            .attr("y", e.y - minY + offsetY)
+            .attr("width", len(e.data))
+            .attr("height", 20) 
+            .attr("stroke","#000000")
+            .attr("fill","#ffffff")
+
+          svg.append("text") 
+            .attr("x", e.x + 5 - minX + offsetX)
+            .attr("y", e.y + 15 - minY + offsetY)
+            .attr("stroke","#000000")
+            .attr("font-family","monospace")
+            .text(e.data)
+
+          // inlet0
+          svg.append("ellipse")
+            .attr("cx", e.x + 5 - minX + offsetX)
+            .attr("cy", e.y - minY + offsetY)
+            .attr("rx", 5)
+            .attr("ry", 2)
+            .attr("fill","#000000")
+
+          // inlet1
+          svg.append("ellipse")
+            .attr("cx", e.x + len(e.data) - 5 - minX + offsetX)
+            .attr("cy", e.y - minY + offsetY)
+            .attr("rx", 5)
+            .attr("ry", 2)
+            .attr("fill","#000000")
+
+          // outlet
+          svg.append("ellipse")
+            .attr("cx", e.x + 5 - minX + offsetX)
+            .attr("cy", e.y + 20 - minY + offsetY)
+            .attr("rx", 5)
+            .attr("ry", 2)
+            .attr("fill","#000000")
+
+          e.inlet0X = e.x + 5 - minX + offsetX
+          e.inlet0Y = e.y - minY + offsetY 
+          e.inlet1X = e.x + len(e.data) - 5 - minX + offsetX
+          e.inlet1Y = e.y - minY + offsetY
+          e.outlet0X = e.x + 5 - minX + offsetX
+          e.outlet0Y = e.y + 20 - minY + offsetY
+          e.textX = e.x + 5 - minX + offsetX
+          e.textY = e.y + 15 - minY + offsetY
+          e.x = e.x - minX + offsetX
+          e.y = e.y - minY + offsetY
+          newGraph.push(e)
+        }
+      })
+
+      graph.forEach(chord => {
+        if (chord.type == 'connect') {
+          const start = newGraph.filter(x => { return x.order == chord._from })
+          const stop = newGraph.filter(x => { return x.order == chord._to })
+          svg.append("line")
+            .attr("x1", start[0].outlet0X)
+            .attr("x2", stop[0].inlet0X)
+            .attr("y1", start[0].outlet0Y)
+            .attr("y2", stop[0].inlet0Y)
+            .attr("stroke", "black")
+          console.log(start[0])
+        }
+      })
+
+      //console.log(newGraph)
+
+    });
