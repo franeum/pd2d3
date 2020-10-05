@@ -1,10 +1,12 @@
-#N canvas 1837 346 591 300 10;
+#N canvas 425 158 1163 660 10;
 #X obj 137 73 osc~ 440;
 #X obj 137 121 *~ 0.5;
 #X obj 137 178 dac~;
-#X msg 137 26 proviamo con la supercazzola prematurata con scappellamento
-a sinistra;
-#X text 267 113 tastooma;
+#X msg 137 26 proviamo con la supercazzola 12 prematurata con scappellamento
+a sinistra e la supercazzola ancora più prematurata senza rotture de
+cojoni;
+#X text 197 114 tastooma parei senza prestare attenzione a ogni cacatura
+de cazzo;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 1 0 2 1;
