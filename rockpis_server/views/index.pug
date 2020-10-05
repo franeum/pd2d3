@@ -42,8 +42,10 @@ block content
 
       //console.log(minX, minY)
 
-      // draw object boxes
       graph.forEach(e => {
+
+        // draw object boxes
+
         if (e.type == 'obj') {
           
           const len = (x) => {
@@ -104,6 +106,50 @@ block content
           e.y = e.y - minY + offsetY
           newGraph.push(e)
         }
+
+        // draw message boxes
+        if (e.type == 'msg') {
+
+          const len = (x) => {
+            let lunghezza = 60
+            if ((x.length * 10) > lunghezza)
+              lunghezza = x.length * 10
+            return lunghezza
+          }
+
+          svg.append("rect") 
+            .attr("x", e.x - minX + offsetX)
+            .attr("y", e.y - minY + offsetY)
+            .attr("width", len(e.message))
+            .attr("height", 20) 
+            .attr("stroke","#000000")
+            .attr("fill","#ffffff")
+
+          svg.append("text") 
+            .attr("x", e.x + 5 - minX + offsetX)
+            .attr("y", e.y + 15 - minY + offsetY)
+            .attr("stroke","#000000")
+            .attr("font-family","monospace")
+            .text(e.message)
+
+          // outlet
+          svg.append("ellipse")
+            .attr("cx", e.x + 5 - minX + offsetX)
+            .attr("cy", e.y + 20 - minY + offsetY)
+            .attr("rx", 5)
+            .attr("ry", 2)
+            .attr("fill","#000000")
+
+          e.outlet0X = e.x + 5 - minX + offsetX
+          e.outlet0Y = e.y + 20 - minY + offsetY
+          e.textX = e.x + 5 - minX + offsetX
+          e.textY = e.y + 15 - minY + offsetY
+          e.x = e.x - minX + offsetX
+          e.y = e.y - minY + offsetY
+          newGraph.push(e)
+
+        }
+
       })
 
       graph.forEach(chord => {
