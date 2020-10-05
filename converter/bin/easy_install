@@ -1,4 +1,4 @@
-#!/home/neum/Documenti/pd2d3/converter/bin/python3
+#!/home/odisseo/Documenti/pd2d3/converter/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

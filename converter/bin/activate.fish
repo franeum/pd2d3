@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/neum/Documenti/pd2d3/converter"
+set -gx VIRTUAL_ENV "/home/odisseo/Documenti/pd2d3/converter"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

@@ -1,0 +1,14 @@
+#N canvas 1971 280 585 370 10;
+#X obj 93 87 osc~ 440;
+#X obj 94 143 *~ 0.5;
+#X obj 94 196 dac~;
+#X msg 93 38 supercazzola prematurata \; con scappellamento a sinistra
+e mbuto mbuto mbuto;
+#X text 169 137 hai rotto ampiamente er cazzo a tutto l'universo monno
+e nnamooooo;
+#X obj 194 214 text define -k stokazzo;
+#A set;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 0 2 1;
+#X connect 3 0 0 0;
